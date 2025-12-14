@@ -4,12 +4,24 @@ from docx import Document
 from io import BytesIO
 
 # -----------------------------------
-# Page Config
+# Simple Password Protection
 # -----------------------------------
+PASSWORD = "baptism2025"  # 🔒 change this password
+
 st.set_page_config(
     page_title="Baptism Word Generator",
     layout="centered"
 )
+
+st.markdown("## 🔒 Protected Access")
+password_input = st.text_input(
+    "Enter password to access the app",
+    type="password"
+)
+
+if password_input != PASSWORD:
+    st.warning("Please enter the correct password to continue.")
+    st.stop()
 
 # -----------------------------------
 # Header
@@ -40,7 +52,6 @@ with st.sidebar:
         3. Download a Word document  
 
         ✔ Includes **20 blank rows** for walk-up baptisms  
-      
         """
     )
 
@@ -131,3 +142,4 @@ if baptism_file:
         "<div style='color:#065f46; font-weight:500; margin-top:10px;'>✓ Document ready for download</div>",
         unsafe_allow_html=True
     )
+
